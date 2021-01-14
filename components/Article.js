@@ -86,9 +86,24 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
-];
-
+        }
+      ];
+      
+      const newArticle = 
+        {
+          title: 'How I Learned Everything In A Day',
+          date: 'Jan 13th, 2021',
+          firstParagraph: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
+              moff wicket tatooine luke.Solo wampa wampa calrissian yoda moff.Darth grievous darth gonk darth hutt.Darth baba skywalker
+              watto fett jango maul han.`,
+      
+          secondParagraph: `Grievous fett calamari anakin skywalker hutt.Alderaan darth kenobi darth r2- d2
+              windu mothma.Sidious darth calamari moff.Wampa mothma sith wedge solo mara.`,
+      
+          thirdParagraph: `Dagobah hutt jawa leia calamari ventress skywalker yoda. Binks wicket hutt coruscant sidious
+              naboo ackbar tatooine. Hutt lars padmé darth.`
+        }
+      data.push(newArticle)
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
@@ -114,3 +129,54 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+const articles = document.querySelector('.articles')
+
+function articleMaker(data){
+
+  const article = document.createElement('div')
+  const articleTitle = document.createElement('h2')
+  const articleDate = document.createElement('p')
+  const articleP1 = document.createElement('p')
+  const articleP2 = document.createElement('p')
+  const articleP3 = document.createElement('p')
+  const expandButton = document.createElement('span')
+  
+
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(articleP1)
+  article.appendChild(articleP2)
+  article.appendChild(articleP3)
+  article.appendChild(expandButton)
+  
+  article.classList.add('article')
+  articleDate.classList.add('date')
+  expandButton.classList.add('expandButton')
+  
+
+
+  articleTitle.textContent = data.title
+  articleDate.textContent = data.date
+  articleP1.textContent = data.firstParagraph
+  articleP2.textContent = data.secondParagraph
+  articleP3.textContent = data.thirdParagraph
+  expandButton.textContent = '+'
+
+  expandButton.addEventListener('click', () => {
+    article.classList.toggle('article-open')
+  })
+
+  return article
+}
+
+
+const articleElement = data.map((article) => {
+  return articleMaker(article)
+})
+
+
+articleElement.forEach((article) => {
+  articles.appendChild(article)
+})
